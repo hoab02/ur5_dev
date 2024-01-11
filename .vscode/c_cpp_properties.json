@@ -1,0 +1,25 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/hoabui/ur5_ws/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/hoabui/ur5_ws/src/ur5_dev/ur5_interface_cpp/include/**",
+        "/home/hoabui/ur5_ws/src/Universal_Robots_ROS_Driver/ur_calibration/include/**",
+        "/home/hoabui/ur5_ws/src/universal_robot/ur_kinematics/include/**",
+        "/home/hoabui/ur5_ws/src/Universal_Robots_ROS_Driver/ur_robot_driver/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

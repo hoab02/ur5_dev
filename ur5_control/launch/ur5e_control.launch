@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="use_sim" default="true"/>
+    <arg name="real_ur5" default="false"/>
+    <arg name="real_ur5e" default="false"/>
+    <arg name="robot_ip" default="192.168.1.120"/>    
+
+    <rosparam file="$(find ur5_control)/config/ur5e_controllers.yaml" command="load"/>
+    <!-- Control motion and compliance controller with one handle -->
+    <remap from="my_motion_control_handle/target_frame" to="target_frame" />
+    <remap from="my_cartesian_motion_controller/target_frame" to="target_frame" />
+    <remap from="my_cartesian_compliance_controller/target_frame" to="target_frame" />
+    
+    <!-- Control wrenches via one topic -->
+    <remap from="my_cartesian_force_controller/target_wrench" to="target_wrench" />
+    <remap from="my_cartesian_force_controller/ft_sensor_wrench" to="wrench" />
+    <remap from="my_cartesian_compliance_controller/target_wrench" to="target_wrench" />
+    <remap from="my_cartesian_compliance_controller/ft_sensor_wrench" to="wrench" />
+
+    <remap from="/my_cartesian_compliance_controller/current_pose" to="current_pose" />
+    <remap from="/my_cartesian_compliance_controller/current_twist" to="current_twist"/>
+    <remap from="/my_cartesian_motion_controller/current_pose" to="current_pose" />
+    
+    <group if="$(arg use_sim)">
+        <include file="$(find ur_gazebo)/launch/ur5e_bringup.launch">      
+        </include>
+    </group>
+
+    <group if="$(arg real_ur5)">
+        <include file="$(find ur_robot_driver)/launch/ur5_bringup.launch">
+            <arg name="robot_ip" value="$(arg robot_ip)"/>
+        </include>
+    </group>
+
+    <group if="$(arg real_ur5e)">
+        <include file="$(find ur_robot_driver)/launch/ur5e_bringup.launch">
+            <arg name="robot_ip" value="$(arg robot_ip)"/>
+        </include>
+    </group>
+
+</launch>
